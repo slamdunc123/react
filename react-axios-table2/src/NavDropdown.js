@@ -1,0 +1,47 @@
+// class NavDropdown extends React.Component {
+//     render() {
+//       return (
+//         <li className="nav-item dropdown">
+//           <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown"
+//             aria-haspopup="true" aria-expanded="false">
+//             {this.props.name}
+//           </a>
+//           <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+//             {this.props.children}
+//           </div>
+//         </li>
+//       )
+//     }
+//   }
+import React from 'react';
+
+class NavDropdown extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isToggleOn: false
+    };
+  }
+  showDropdown(e) {
+    e.preventDefault();
+    this.setState(prevState => ({
+      isToggleOn: !prevState.isToggleOn
+    }));
+  }
+  render() {
+    const classDropdownMenu = 'dropdown-menu' + (this.state.isToggleOn ? ' show' : '')
+    return (
+      <li className="nav-item dropdown">
+        <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false"
+          onClick={(e) => {this.showDropdown(e)}}>
+          {this.props.name}
+        </a>
+        <div className={classDropdownMenu} aria-labelledby="navbarDropdown">
+          {this.props.children}
+        </div>
+      </li>
+    )
+  }
+}
+export default NavDropdown;
